@@ -21,10 +21,16 @@ h1 {
 
 #form-step-2 {
   visibility: hidden;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s ease, visibility 0s linear 1s, transform 1s ease;
 }
 
 #form-step-2.visible {
   visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0s;
 }
 
 input {
