@@ -37,6 +37,11 @@ input:focus {
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
 
+input::placeholder {
+  color: #6c6484;
+  opacity: 0.5;
+}
+
 .button-container {
   display: flex;
   justify-content: end;
