@@ -6,8 +6,8 @@ Author: Samuel Skoupil
 
 function simple_line () {
     return '<form id="simple-form" method="post">
-              <div id="form-step-1" class="form">
-              <label for="name">Name</label>
+              <div id="form-step-1" class="form visible" >
+            <label for="name">Name <span class="required">*</span></label>
               <input type="text" id="name" name="name" required placeholder="Enter your name">
                 <div class="button-container">
                 <button type="button" onClick="show_next_page()">Next step</button>
@@ -15,15 +15,13 @@ function simple_line () {
               </div>  
 
               <div id="form-step-2" class="form">
-              <label for="last_name">Last Name</label>
+              <label for="last_name">Last Name<span class="required">*</span></label>
               <input type="text" id="last_name" name="last_name" required placeholder="Enter your last name">
                 <div class="button-container">
                 <button type="submit" onClick="show_next_page()">Submit</button>
                 </div>
               </div>  
             </form>';
-
-            
 }
 
 add_shortcode("simple_form", "simple_line");

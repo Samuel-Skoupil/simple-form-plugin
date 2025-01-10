@@ -1,4 +1,19 @@
 function show_next_page() {
-  document.getElementById("form-step-1").style.display = "none";
-  document.getElementById("form-step-2").classList.add("visible");
+
+  const currentStep = document.querySelector(".form.visible");
+
+  const requiredInputs = currentStep.querySelectorAll("input[required]");
+  let allFilled = true;
+
+  for (const input of requiredInputs) {
+    if (input.value.trim() === "") {
+      allFilled = false;
+      break;
+    }
+  }
+
+  if (allFilled) {
+    document.getElementById("form-step-1").style.display = "none";
+    document.getElementById("form-step-2").classList.add("visible");
+  }
 }
