@@ -19,6 +19,14 @@ h1 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+#form-step-2 {
+  visibility: hidden;
+}
+
+#form-step-2.visible {
+  visibility: visible;
+}
+
 input {
   width: 200px;
   height: 25px;
