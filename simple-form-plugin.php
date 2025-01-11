@@ -28,6 +28,7 @@ add_shortcode("simple_form", "simple_line");
 function simple_form_register_settings()
 {
     register_setting('simple_form_settings_group', 'simple_form_type');
+    register_setting('simple_form_settings_group', 'simple_form_email');
 }
 add_action('admin_init', 'simple_form_register_settings');
 
@@ -52,7 +53,10 @@ function simple_form_settings_page()
     // Vykresľuje naše nastavenia
     do_settings_sections('simple-form-settings');
 
+    // Vykreslí nastavenia vo forme tabuľky
     echo '<table class="form-table">';
+
+    // Možnosť výberu počtu krokov formulára
     echo '<tr valign="top">';
     echo '<th scope="row">Choose number of form steps:</th>';
     echo '<td>';
@@ -62,11 +66,21 @@ function simple_form_settings_page()
     echo '</select>';
     echo '</td>';
     echo '</tr>';
+
+    // Textové pole pre email
+    echo '<tr valign="top">';
+    echo '<th scope="row">Email to receive submissions:</th>';
+    echo '<td>';
+    echo '<input type="email" name="simple_form_email" value="' . esc_attr(get_option('simple_form_email')) . '" />';
+    echo '</td>';
+    echo '</tr>';
+
     echo '</table>';
 
     echo '<button type="submit" class="button button-primary">Save</button>';
     echo '</form>';
 }
+
 
 
 function simple_form_settings_menu()
