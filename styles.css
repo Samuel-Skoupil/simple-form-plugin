@@ -12,11 +12,18 @@ h1 {
 
 .form {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12%;
   padding: 20px;
   background-color: #fff;
   border-radius: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-element {
+  width: 42%;
+  margin-bottom: 20px;
 }
 
 #form-step-2 {
@@ -34,7 +41,7 @@ h1 {
 }
 
 input {
-  width: 200px;
+  width: 85%;
   height: 25px;
   padding: 10px 15px;
   font-size: 16px;
@@ -66,7 +73,6 @@ input::placeholder {
 .button-container {
   display: flex;
   justify-content: end;
-  margin-top: 20px;
 }
 
 button {
