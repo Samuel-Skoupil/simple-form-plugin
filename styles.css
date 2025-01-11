@@ -30,7 +30,10 @@ h1 {
   visibility: hidden;
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 1s ease, visibility 0s linear 1s, transform 1s ease;
+  transition:
+    opacity 1s ease,
+    visibility 0s linear 1s,
+    transform 1s ease;
 }
 
 #form-step-2.visible {
@@ -91,4 +94,12 @@ label {
   margin-bottom: 10px;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.submit {
+  display: none;
+}
+
+.next-step {
+  visibility: visible;
 }

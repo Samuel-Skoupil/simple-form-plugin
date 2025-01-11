@@ -1,5 +1,4 @@
 function show_next_page() {
-
   const currentStep = document.querySelector(".form.visible");
 
   const requiredInputs = currentStep.querySelectorAll("input[required]");
@@ -15,5 +14,7 @@ function show_next_page() {
   if (allFilled) {
     document.getElementById("form-step-1").style.display = "none";
     document.getElementById("form-step-2").classList.add("visible");
+    document.querySelector(".submit").style.display = "block";
+    document.querySelector(".next-step").style.display = "none";
   }
 }
