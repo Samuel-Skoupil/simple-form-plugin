@@ -1,9 +1,10 @@
 <?php
-function handle_simple_form_submission() {
+function handle_simple_form_submission()
+{
     check_ajax_referer("simple_form_nonce", "security");
 
     $name = sanitize_text_field($_POST["name"]);
-    $last_name = sanitize_text_field($_POST["last_name"]); 
+    $last_name = sanitize_text_field($_POST["last_name"]);
     $email = sanitize_email($_POST["email"]);
     $phone_number = sanitize_text_field($_POST["phone_number"]);
 
@@ -13,6 +14,8 @@ function handle_simple_form_submission() {
     $message = "Name: $name\nLast Name: $last_name\nEmail: $email\nPhone Number: $phone_number";
 
     $sent = wp_mail($to_email, $subject, $message);
+    error_log('Sending email to: ' . $to_email);
+
 
     if ($sent) {
         wp_send_json_success("Form submitted successfully");

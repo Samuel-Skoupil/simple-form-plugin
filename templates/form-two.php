@@ -1,4 +1,4 @@
-<form id="simple-form" method="post">
+<form id="simple-form-two" method="post">
 
     <div id="form-step-1" class="form visible">
         <div class="form-element">
