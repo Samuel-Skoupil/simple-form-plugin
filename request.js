@@ -1,7 +1,7 @@
 function handleFormSubmission(formId) {
   const form = document.getElementById(formId);
 
-  if (!form) return; // Ak formulár neexistuje, preskočíme
+  if (!form) return;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -20,8 +20,15 @@ function handleFormSubmission(formId) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          document.querySelector(".button-container").innerHTML =
-            "<p>Form has been submitted successfully</p>";
+          form.style.display = "none";
+          const successContainer = document.createElement("div");
+          successContainer.className = "success-message";
+          successContainer.innerHTML =
+            "<p>Form has beem submitted successfully</p>";
+          form.parentNode.appendChild(successContainer);
+          setTimeout(() => {
+            successContainer.classList.add("visible");
+          }, 100);
         } else {
           document.querySelector(".button-container").innerHTML =
             "<p>Something went wrong</p>";
@@ -35,6 +42,5 @@ function handleFormSubmission(formId) {
   });
 }
 
-// Pripojíme funkciu k obom formulárom
 handleFormSubmission("simple-form-one");
 handleFormSubmission("simple-form-two");
