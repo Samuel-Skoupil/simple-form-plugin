@@ -139,3 +139,35 @@ label {
   transform: scale(1);
   transition-delay: 0s;
 }
+
+/* custom select  */
+
+select {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #5a5a5a;
+  font-family: "DM Sans", sans-serif;
+  appearance: none;
+  position: relative;
+}
+
+select::after {
+  content: "▼";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #6c6484;
+  pointer-events: none;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
