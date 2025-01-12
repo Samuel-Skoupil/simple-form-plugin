@@ -1,6 +1,12 @@
 <form id="simple-form-two" method="post">
-    <!-- Krok 1 -->
+    <!-- Step 1 -->
     <div id="form-step-1" class="form visible">
+        <div class="step-indicator">
+            <div class="step active">1</div>
+            <div class="divider"></div>
+            <div class="step">2</div>
+        </div>
+
         <div class="form-element">
             <label for="name">Name <span class="required">*</span></label>
             <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -22,13 +28,19 @@
         </div>
     </div>
 
-    <!-- Tlačidlo prechod na ďalší krok -->
+    <!-- Next Step Button -->
     <div class="button-container">
         <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
     </div>
 
-    <!-- Krok 2 -->
+    <!-- Step 2 -->
     <div id="form-step-2" class="form">
+        <div class="step-indicator">
+            <div class="step">1</div>
+            <div class="divider"></div>
+            <div class="step active">2</div>
+        </div>
+
         <div class="form-element">
             <label for="state">State</label>
             <input type="text" id="state" name="state" placeholder="Enter your state">
@@ -55,7 +67,7 @@
         </div>
     </div>
 
-    <!-- Tlačidlo odoslania formulára -->
+    <!-- Submit Button -->
     <div class="button-container">
         <button class="submit" type="submit">Submit</button>
     </div>

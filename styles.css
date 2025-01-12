@@ -186,3 +186,46 @@ select:focus {
   outline: none;
   cursor: pointer;
 }
+
+/* pokus */
+
+/* Krokový indikátor */
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.step {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.step.active {
+  background-color: #4a3aff;
+}
+
+.divider {
+  width: 50px;
+  height: 2px;
+  background-color: #e0e0e0;
+  margin: 0 10px;
+}
+
+/* Horizontálna čiara medzi sekciami formulára */
+.form-divider {
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 20px 0;
+}
