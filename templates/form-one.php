@@ -40,9 +40,10 @@
         <div class="form-element">
             <label for="gender">Gender</label>
             <select id="gender" name="gender">
+                <option value="" disabled selected hidden>Select your gender</option>
+                <option value="other">Other</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
-                <option value="other">Other</option>
             </select>
         </div>
     </div>

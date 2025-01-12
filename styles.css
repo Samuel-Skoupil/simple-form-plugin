@@ -7,7 +7,6 @@
 h1 {
   font-size: 24px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .form {
@@ -54,6 +53,7 @@ input {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: #5a5a5a;
   font-family: Arial, sans-serif;
+  margin-bottom: 3px;
 }
 
 input:focus {
@@ -93,7 +93,7 @@ button {
 label {
   margin-bottom: 10px;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .submit {
@@ -143,7 +143,8 @@ label {
 /* custom select  */
 
 select {
-  width: 100%;
+  width: 98%;
+  height: 45px;
   padding: 10px 15px;
   font-size: 16px;
   border: none;
@@ -170,4 +171,18 @@ select::after {
 select:focus {
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.styled-select {
+  appearance: none;
+  background-color: #f9f9f9;
+  color: #6c6484;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  outline: none;
+  cursor: pointer;
 }
