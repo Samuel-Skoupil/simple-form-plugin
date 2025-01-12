@@ -3,9 +3,14 @@ document.getElementById("simple-form").addEventListener("submit", function (e) {
 
   const formData = new FormData(this);
 
+  formData.append("action", "handle_simple_form_submission");
+
   fetch(simple_form_ajax.ajax_url, {
     method: "POST",
     body: formData,
+    headers: {
+      "X-WP-Nonce": simple_form_ajax.nonce,
+    },
   })
     .then((response) => response.json())
     .then((data) => {

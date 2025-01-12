@@ -4,6 +4,8 @@ Plugin Name: Simple Form Plugin
 Author: Samuel Skoupil
 */
 
+require_once plugin_dir_path(__FILE__) . "ajax-handler.php";
+
 function simple_line()
 {
     $form_type = get_option('simple_form_type', 'one');
@@ -38,6 +40,11 @@ function add_assets()
 {
     wp_enqueue_style("my-styles", plugin_dir_url(__FILE__) . "styles.css");
     wp_enqueue_script("my-script", plugin_dir_url(__FILE__) . "script.js", array(), false, true);
+    wp_enqueue_script("request-script", plugin_dir_url(__FILE__) . "request.js", array('jquery'), false, true);
+    wp_localize_script("request-script", "simple_form_ajax", array(
+        "ajax_url" => admin_url("admin-ajax.php"),
+        "nonce" => wp_create_nonce("simple_form_nonce")
+    ));
 }
 
 add_action("wp_enqueue_scripts", "add_assets");
