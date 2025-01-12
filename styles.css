@@ -222,10 +222,18 @@ select:focus {
   margin: 0 10px;
 }
 
-/* Horizontálna čiara medzi sekciami formulára */
 .form-divider {
   border: none;
   height: 1px;
   background-color: #e0e0e0;
   margin: 20px 0;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 }

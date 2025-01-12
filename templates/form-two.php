@@ -7,6 +7,8 @@
             <div class="step">2</div>
         </div>
 
+        <div class="border-bottom"></div>
+
         <div class="form-element">
             <label for="name">Name <span class="required">*</span></label>
             <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -40,6 +42,9 @@
             <div class="divider"></div>
             <div class="step active">2</div>
         </div>
+
+        <div class="border-bottom"></div>
+
 
         <div class="form-element">
             <label for="state">State</label>
