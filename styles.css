@@ -216,9 +216,17 @@ select:focus {
 }
 
 .divider {
+  height: 6px;
+  background: linear-gradient(to right, #4a3aff 0%, #e0e0e0 0%);
   width: 50px;
+  margin: 0 10px;
+  border-radius: 4px;
+}
+
+.divider-done {
   height: 2px;
-  background-color: #e0e0e0;
+  background: #4a3aff 0%;
+  width: 50px;
   margin: 0 10px;
 }
 

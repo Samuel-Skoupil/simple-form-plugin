@@ -38,8 +38,8 @@
     <!-- Step 2 -->
     <div id="form-step-2" class="form">
         <div class="step-indicator">
-            <div class="step">1</div>
-            <div class="divider"></div>
+            <div class="step active">1</div>
+            <div class="divider-done"></div>
             <div class="step active">2</div>
         </div>
 
