@@ -110,6 +110,12 @@ label {
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
   background-size: 27px;
+  filter: grayscale(100%);
+  transition: filter 0.65s ease;
+}
+
+.icon-filled {
+  filter: none;
 }
 
 #name {

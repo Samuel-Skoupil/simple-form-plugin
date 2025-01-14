@@ -89,3 +89,13 @@ formElements.forEach((element) =>
 );
 
 // TO DO: Icons reacting to state of validation
+// Pridáme event listener na všetky inputy s ikonami
+document.querySelectorAll(".icon").forEach((input) => {
+  input.addEventListener("input", function () {
+    if (this.value.trim() !== "") {
+      this.classList.add("icon-filled"); // Pridá zelenú ikonku
+    } else {
+      this.classList.remove("icon-filled"); // Vráti sivú ikonku
+    }
+  });
+});
