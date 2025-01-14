@@ -24,7 +24,6 @@ function show_next_page() {
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!emailPattern.test(emailInput.value.trim())) {
       allFilled = false;
-      console.error("Invalid email format");
     }
   }
 
