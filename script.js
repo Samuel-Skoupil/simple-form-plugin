@@ -87,3 +87,5 @@ const formElements = document.querySelectorAll(".form input, .form select");
 formElements.forEach((element) =>
   element.addEventListener("input", updateDividerProgress)
 );
+
+// TO DO: Icons reacting to state of validation
