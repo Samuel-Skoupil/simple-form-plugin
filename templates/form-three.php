@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="button-container">
-        <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
+        <button id="hide-button" class="next-step" type="button" onClick="show_next_page_three()">Next step 1</button>
     </div>
 
     <!-- Step 2 -->
@@ -60,7 +60,7 @@
 
     </div>
     <div class="button-container">
-        <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
+        <button id="hide-next-button" class="next-stesp hide" type="button" onClick="show_next_page_three()">Next step 2</button>
     </div>
 
     <!-- Step 3 -->
@@ -93,6 +93,6 @@
 
     </div>
     <div class="button-container">
-        <button class="submit" type="submit">Submit</button>
+        <button class="submit" type="submit" onClick="validateAndSubmit()">Submit</button>
     </div>
 </form>

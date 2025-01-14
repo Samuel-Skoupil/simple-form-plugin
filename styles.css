@@ -25,7 +25,9 @@ h1 {
   margin-bottom: 20px;
 }
 
-#form-step-2 {
+#form-step-2,
+#form-step-3,
+.hide {
   visibility: hidden;
   opacity: 0;
   transform: scale(0.9);
@@ -35,11 +37,21 @@ h1 {
     transform 1s ease;
 }
 
-#form-step-2.visible {
+#form-step-2.visible,
+#form-step-3.visible,
+.hide.visible {
   visibility: visible;
   opacity: 1;
   transform: scale(1);
   transition-delay: 0s;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.none {
+  display: none;
 }
 
 input {
@@ -270,10 +282,11 @@ select:focus {
 }
 
 .divider-done {
-  height: 2px;
+  height: 6px;
   background: #4a3aff 0%;
   width: 50px;
   margin: 0 10px;
+  border-radius: 4px;
 }
 
 .form-divider {

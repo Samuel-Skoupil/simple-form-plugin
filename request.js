@@ -44,3 +44,4 @@ function handleFormSubmission(formId) {
 
 handleFormSubmission("simple-form-one");
 handleFormSubmission("simple-form-two");
+handleFormSubmission("simple-form-three");

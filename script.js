@@ -35,6 +35,58 @@ function show_next_page() {
   }
 }
 
+// three step form
+
+function show_next_page_three() {
+  const currentStep = document.querySelector(".form.visible");
+  const requiredInputs = currentStep.querySelectorAll("input[required]");
+  let allFilled = true;
+
+  // Validácia inputov
+  requiredInputs.forEach((input) => {
+    const errorIs = input.nextElementSibling;
+    if (errorIs && errorIs.classList.contains("error-message")) {
+      errorIs.remove();
+    }
+
+    if (input.value.trim() === "") {
+      allFilled = false;
+      const validationMessage = document.createElement("div");
+      validationMessage.classList = "error-message";
+      validationMessage.textContent = "This field is required";
+      input.insertAdjacentElement("afterend", validationMessage);
+    }
+  });
+
+  // Špeciálna validácia pre email
+  const emailInput = currentStep.querySelector("#email");
+  if (emailInput) {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailPattern.test(emailInput.value.trim())) {
+      allFilled = false;
+    }
+  }
+  // Posunutie na ďalší krok
+  if (allFilled) {
+    if (currentStep.id === "form-step-1") {
+      console.log(currentStep);
+      currentStep.classList.remove("visible");
+      currentStep.classList.remove("hide");
+      document.querySelector(".hide").classList.remove("hide"); // Nastavenie display = "block";
+      document.getElementById("hide-button").style.display = "none";
+      currentStep.style.display = "none";
+      document.getElementById("form-step-2").classList.add("visible");
+    } else if (allFilled && currentStep.id === "form-step-2") {
+      console.log(currentStep);
+      document.getElementById("form-step-2").style.display = "none";
+      document.getElementById("form-step-3").classList.add("visible");
+      document.querySelector(".submit").style.display = "block";
+      document.querySelector(".next-step").style.display = "none";
+      document.getElementById("hide-next-button").style.display = "none";
+    }
+  }
+}
+
 // Validate form inputs
 
 function validateFormInputs(form) {
