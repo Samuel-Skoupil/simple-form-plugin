@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="button-container">
-        <button id="hide-button" class="next-step" type="button" onClick="show_next_page_three()">Next step 1</button>
+        <button id="hide-button" class="next-step" type="button" onClick="show_next_page_three()">Next step</button>
     </div>
 
     <!-- Step 2 -->
@@ -60,7 +60,7 @@
 
     </div>
     <div class="button-container">
-        <button id="hide-next-button" class="next-stesp hide" type="button" onClick="show_next_page_three()">Next step 2</button>
+        <button id="hide-next-button" class="next-stesp hide" type="button" onClick="show_next_page_three()">Next step</button>
     </div>
 
     <!-- Step 3 -->

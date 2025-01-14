@@ -35,7 +35,7 @@ function show_next_page() {
   }
 }
 
-// three step form
+// three step form next page
 
 function show_next_page_three() {
   const currentStep = document.querySelector(".form.visible");
