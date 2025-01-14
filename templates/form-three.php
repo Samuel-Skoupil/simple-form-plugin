@@ -30,10 +30,9 @@
             <label for="phone_number">Phone Number</label>
             <input class="icon" type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
         </div>
-
-        <div class="button-container">
-            <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
-        </div>
+    </div>
+    <div class="button-container">
+        <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
     </div>
 
     <!-- Step 2 -->
@@ -58,9 +57,10 @@
             <input class="icon" type="text" id="city" name="city" placeholder="Enter your city">
         </div>
 
-        <div class="button-container">
-            <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
-        </div>
+
+    </div>
+    <div class="button-container">
+        <button class="next-step" type="button" onClick="show_next_page()">Next step</button>
     </div>
 
     <!-- Step 3 -->
@@ -90,8 +90,9 @@
             </select>
         </div>
 
-        <div class="button-container">
-            <button class="submit" type="submit">Submit</button>
-        </div>
+
+    </div>
+    <div class="button-container">
+        <button class="submit" type="submit">Submit</button>
     </div>
 </form>

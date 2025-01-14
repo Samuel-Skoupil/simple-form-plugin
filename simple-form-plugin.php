@@ -18,12 +18,19 @@ function simple_line()
     }
 
     // Načíta two-step form
-    ob_start();
-    include plugin_dir_path(__FILE__) . 'templates/form-two.php';
-    return ob_get_clean();
+    if ($form_type === 'two') {
+        ob_start();
+        include plugin_dir_path(__FILE__) . 'templates/form-two.php';
+        return ob_get_clean();
+    }
+
+    // Načíta three-step form
+    if ($form_type === 'three') {
+        ob_start();
+        include plugin_dir_path(__FILE__) . 'templates/form-three.php';
+        return ob_get_clean();
+    }
 }
-
-
 
 add_shortcode("simple_form", "simple_line");
 
@@ -33,8 +40,6 @@ function simple_form_register_settings()
     register_setting('simple_form_settings_group', 'simple_form_email');
 }
 add_action('admin_init', 'simple_form_register_settings');
-
-
 
 function add_assets()
 {
@@ -46,7 +51,6 @@ function add_assets()
         "nonce" => wp_create_nonce("simple_form_nonce")
     ));
 }
-
 add_action("wp_enqueue_scripts", "add_assets");
 
 function simple_form_settings_page()
@@ -54,27 +58,21 @@ function simple_form_settings_page()
     echo '<h1>Simple Form Settings</h1>';
     echo '<form method="post" action="options.php">';
 
-    // Generuje skryté inputy potrebné na spracovanie nastavení
     settings_fields('simple_form_settings_group');
-
-    // Vykresľuje naše nastavenia
     do_settings_sections('simple-form-settings');
 
-    // Vykreslí nastavenia vo forme tabuľky
     echo '<table class="form-table">';
-
-    // Možnosť výberu počtu krokov formulára
     echo '<tr valign="top">';
     echo '<th scope="row">Choose number of form steps:</th>';
     echo '<td>';
     echo '<select name="simple_form_type">';
     echo '<option value="one" ' . selected(get_option('simple_form_type'), 'one', false) . '>One-step Form</option>';
     echo '<option value="two" ' . selected(get_option('simple_form_type'), 'two', false) . '>Two-step Form</option>';
+    echo '<option value="three" ' . selected(get_option('simple_form_type'), 'three', false) . '>Three-step Form</option>';
     echo '</select>';
     echo '</td>';
     echo '</tr>';
 
-    // Textové pole pre email
     echo '<tr valign="top">';
     echo '<th scope="row">Email to receive submissions:</th>';
     echo '<td>';
@@ -88,16 +86,14 @@ function simple_form_settings_page()
     echo '</form>';
 }
 
-
-
 function simple_form_settings_menu()
 {
     add_options_page(
         'Simple Form Settings',
-        'Simple Form Settings',    // Názov v menu
-        'manage_options',          // Prístupové práva
-        'simple-form-settings',    // Slug stránky
-        'simple_form_settings_page' // Callback funkcia, ktorá vykreslí obsah stránky
+        'Simple Form Settings',
+        'manage_options',
+        'simple-form-settings',
+        'simple_form_settings_page'
     );
 }
 add_action('admin_menu', 'simple_form_settings_menu');
