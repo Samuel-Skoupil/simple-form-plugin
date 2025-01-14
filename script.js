@@ -88,14 +88,25 @@ formElements.forEach((element) =>
   element.addEventListener("input", updateDividerProgress)
 );
 
-// TO DO: Icons reacting to state of validation
-// Pridáme event listener na všetky inputy s ikonami
+// Event listener for icon inputs
 document.querySelectorAll(".icon").forEach((input) => {
-  input.addEventListener("input", function () {
+  input.addEventListener("blur", function () {
     if (this.value.trim() !== "") {
-      this.classList.add("icon-filled"); // Pridá zelenú ikonku
+      this.classList.add("icon-filled");
     } else {
-      this.classList.remove("icon-filled"); // Vráti sivú ikonku
+      this.classList.remove("icon-filled");
+    }
+
+    // Špeciálna validácia pre email
+    if (this.id === "email") {
+      const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+      if (!emailPattern.test(this.value.trim())) {
+        this.classList.add("email-error"); 
+      } else {
+        this.classList.remove("email-error"); 
+        this.classList.add("icon-filled"); 
+      }
     }
   });
 });
