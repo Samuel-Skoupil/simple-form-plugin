@@ -1,6 +1,4 @@
 // Show next page when all required inputs are filled
-
-// TO DO: Add validation for required inputs
 function show_next_page() {
   const currentStep = document.querySelector(".form.visible");
   const requiredInputs = currentStep.querySelectorAll("input[required]");
@@ -26,6 +24,41 @@ function show_next_page() {
     document.getElementById("form-step-2").classList.add("visible");
     document.querySelector(".submit").style.display = "block";
     document.querySelector(".next-step").style.display = "none";
+  }
+}
+
+// Validate form inputs
+
+function validateFormInputs(form) {
+  const requiredInputs = form.querySelectorAll("input[required]");
+  let allFilled = true;
+
+  requiredInputs.forEach((input) => {
+    const errorIs = input.nextElementSibling;
+    if (errorIs && errorIs.classList.contains("error-message")) {
+      errorIs.remove();
+    }
+
+    if (input.value.trim() === "") {
+      allFilled = false;
+      const validationMessage = document.createElement("div");
+      validationMessage.classList.add("error-message");
+      validationMessage.textContent = "This field is required";
+      input.insertAdjacentElement("afterend", validationMessage);
+    }
+  });
+
+  return allFilled;
+}
+
+// Call the function to validate when submiting the form
+
+function validateAndSubmit() {
+  const form = document.querySelector(".form");
+  const allFilled = validateFormInputs(form);
+
+  if (allFilled) {
+    form.submit();
   }
 }
 

@@ -1,5 +1,5 @@
 <form id="simple-form-one" method="post">
-    <div class="form">
+    <div class="form ">
         <!-- Existing fields -->
         <div class="form-element">
             <label for="name">Name <span class="required">*</span></label>
@@ -49,6 +49,6 @@
     </div>
 
     <div class="button-container">
-        <button type="submit">Submit</button>
+        <button type="submit" onClick="validateAndSubmit()">Submit</button>
     </div>
 </form>
