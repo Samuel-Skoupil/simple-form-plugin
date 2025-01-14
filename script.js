@@ -19,6 +19,15 @@ function show_next_page() {
     }
   });
 
+  const emailInput = currentStep.querySelector("#email");
+  if (emailInput) {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailPattern.test(emailInput.value.trim())) {
+      allFilled = false;
+      console.error("Invalid email format");
+    }
+  }
+
   if (allFilled) {
     document.getElementById("form-step-1").style.display = "none";
     document.getElementById("form-step-2").classList.add("visible");
@@ -102,10 +111,10 @@ document.querySelectorAll(".icon").forEach((input) => {
       const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
       if (!emailPattern.test(this.value.trim())) {
-        this.classList.add("email-error"); 
+        this.classList.add("email-error");
       } else {
-        this.classList.remove("email-error"); 
-        this.classList.add("icon-filled"); 
+        this.classList.remove("email-error");
+        this.classList.add("icon-filled");
       }
     }
   });

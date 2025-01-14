@@ -26,7 +26,7 @@
 
         <div class="form-element">
             <label for="phone_number">Phone Number</label>
-            <input class="icon" type="text" id="phone_number" name="phone_number" required placeholder="Enter your phone number">
+            <input class="icon" type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
         </div>
     </div>
 
