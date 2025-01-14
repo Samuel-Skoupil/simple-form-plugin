@@ -1,16 +1,25 @@
 // Show next page when all required inputs are filled
+
+// TO DO: Add validation for required inputs
 function show_next_page() {
   const currentStep = document.querySelector(".form.visible");
-
   const requiredInputs = currentStep.querySelectorAll("input[required]");
   let allFilled = true;
 
-  for (const input of requiredInputs) {
+  requiredInputs.forEach((input) => {
+    const errorIs = input.nextElementSibling;
+    if (errorIs && errorIs.classList.contains("error-message")) {
+      errorIs.remove();
+    }
+
     if (input.value.trim() === "") {
       allFilled = false;
-      break;
+      const validationMessage = document.createElement("div");
+      validationMessage.classList = "error-message";
+      validationMessage.textContent = "This field is required";
+      input.insertAdjacentElement("afterend", validationMessage);
     }
-  }
+  });
 
   if (allFilled) {
     document.getElementById("form-step-1").style.display = "none";
