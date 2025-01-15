@@ -104,3 +104,17 @@ function simple_form_settings_menu()
     );
 }
 add_action('admin_menu', 'simple_form_settings_menu');
+
+function disable_form_submit_on_enter()
+{
+    echo "<script>
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>";
+}
+add_action('wp_footer', 'disable_form_submit_on_enter');
