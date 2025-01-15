@@ -27,7 +27,7 @@ function show_next_page() {
     }
   }
 
-  if (allFilled) {
+  if (allFilled && phoneIsValid) {
     document.getElementById("form-step-1").style.display = "none";
     document.getElementById("form-step-2").classList.add("visible");
     document.querySelector(".submit").style.display = "block";
@@ -64,7 +64,7 @@ function show_next_page_three() {
       allFilled = false;
     }
   }
-  if (allFilled) {
+  if (allFilled && phoneIsValid) {
     if (currentStep.id === "form-step-1") {
       currentStep.classList.remove("visible");
       currentStep.classList.remove("hide");
@@ -119,7 +119,7 @@ function show_next_page_four() {
       document.getElementById("hide-button").style.display = "none";
       currentStep.style.display = "none";
       document.getElementById("form-step-2").classList.add("visible");
-    } else if (allFilled && currentStep.id === "form-step-2") {
+    } else if (allFilled && currentStep.id === "form-step-2" && phoneIsValid) {
       document.getElementById("form-step-2").style.display = "none";
       document.getElementById("form-step-2").classList.remove("visible");
       document.getElementById("form-step-3").classList.add("visible");
@@ -203,6 +203,8 @@ formElements.forEach((element) =>
   element.addEventListener("input", updateDividerProgress)
 );
 
+let phoneIsValid = true;
+
 // Event listener for icon inputs
 document.querySelectorAll(".icon").forEach((input) => {
   input.addEventListener("blur", function () {
@@ -228,9 +230,11 @@ document.querySelectorAll(".icon").forEach((input) => {
       const phonePattern = /^\+?\d[\d\s]*$/;
       if (!phonePattern.test(this.value.trim())) {
         this.classList.add("phone-error");
+        phoneIsValid = false;
       } else {
         this.classList.remove("phone-error");
         this.classList.add("icon-filled");
+        phoneIsValid = true;
       }
     }
   });
