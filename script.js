@@ -27,7 +27,7 @@ function show_next_page() {
     }
   }
 
-  if (allFilled && phoneIsValid) {
+  if (allFilled && phoneIsValid && emailIsValid) {
     document.getElementById("form-step-1").style.display = "none";
     document.getElementById("form-step-2").classList.add("visible");
     document.querySelector(".submit").style.display = "block";
@@ -64,7 +64,7 @@ function show_next_page_three() {
       allFilled = false;
     }
   }
-  if (allFilled && phoneIsValid) {
+  if (allFilled && phoneIsValid && emailIsValid) {
     if (currentStep.id === "form-step-1") {
       currentStep.classList.remove("visible");
       currentStep.classList.remove("hide");
@@ -119,7 +119,12 @@ function show_next_page_four() {
       document.getElementById("hide-button").style.display = "none";
       currentStep.style.display = "none";
       document.getElementById("form-step-2").classList.add("visible");
-    } else if (allFilled && currentStep.id === "form-step-2" && phoneIsValid) {
+    } else if (
+      allFilled &&
+      currentStep.id === "form-step-2" &&
+      phoneIsValid &&
+      emailIsValid
+    ) {
       document.getElementById("form-step-2").style.display = "none";
       document.getElementById("form-step-2").classList.remove("visible");
       document.getElementById("form-step-3").classList.add("visible");
@@ -204,6 +209,7 @@ formElements.forEach((element) =>
 );
 
 let phoneIsValid = true;
+let emailIsValid = true;
 
 // Event listener for icon inputs
 document.querySelectorAll(".icon").forEach((input) => {
@@ -220,14 +226,21 @@ document.querySelectorAll(".icon").forEach((input) => {
 
       if (!emailPattern.test(this.value.trim())) {
         this.classList.add("email-error");
+        emailIsValid = false;
       } else {
         this.classList.remove("email-error");
         this.classList.add("icon-filled");
+        emailIsValid = true;
       }
     }
 
     if (this.id === "phone_number") {
       const phonePattern = /^\+?\d[\d\s]*$/;
+
+      if (input.value.trim() === "") {
+        return true;
+      }
+
       if (!phonePattern.test(this.value.trim())) {
         this.classList.add("phone-error");
         phoneIsValid = false;
