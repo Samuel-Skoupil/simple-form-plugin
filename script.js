@@ -223,5 +223,15 @@ document.querySelectorAll(".icon").forEach((input) => {
         this.classList.add("icon-filled");
       }
     }
+
+    if (this.id === "phone_number") {
+      const phonePattern = /^\+?\d[\d\s]*$/;
+      if (!phonePattern.test(this.value.trim())) {
+        this.classList.add("phone-error");
+      } else {
+        this.classList.remove("phone-error");
+        this.classList.add("icon-filled");
+      }
+    }
   });
 });
