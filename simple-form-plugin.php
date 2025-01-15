@@ -30,6 +30,12 @@ function simple_line()
         include plugin_dir_path(__FILE__) . 'templates/form-three.php';
         return ob_get_clean();
     }
+
+    if ($form_type === 'four') {
+        ob_start();
+        include plugin_dir_path(__FILE__) . 'templates/form-four.php';
+        return ob_get_clean();
+    }
 }
 
 add_shortcode("simple_form", "simple_line");
@@ -69,6 +75,7 @@ function simple_form_settings_page()
     echo '<option value="one" ' . selected(get_option('simple_form_type'), 'one', false) . '>One-step Form</option>';
     echo '<option value="two" ' . selected(get_option('simple_form_type'), 'two', false) . '>Two-step Form</option>';
     echo '<option value="three" ' . selected(get_option('simple_form_type'), 'three', false) . '>Three-step Form</option>';
+    echo '<option value="four" ' . selected(get_option('simple_form_type'), 'four', false) . '>Four-step Form</option>';
     echo '</select>';
     echo '</td>';
     echo '</tr>';

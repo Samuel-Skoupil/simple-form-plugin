@@ -1,4 +1,4 @@
-// Show next page when all required inputs are filled
+// Show next page when all required inputs are filled two step from
 function show_next_page() {
   const currentStep = document.querySelector(".form.visible");
   const requiredInputs = currentStep.querySelectorAll("input[required]");
@@ -35,14 +35,13 @@ function show_next_page() {
   }
 }
 
-// three step form next page
+// Show next page when all required inputs are filled three step from
 
 function show_next_page_three() {
   const currentStep = document.querySelector(".form.visible");
   const requiredInputs = currentStep.querySelectorAll("input[required]");
   let allFilled = true;
 
-  // Validácia inputov
   requiredInputs.forEach((input) => {
     const errorIs = input.nextElementSibling;
     if (errorIs && errorIs.classList.contains("error-message")) {
@@ -58,7 +57,6 @@ function show_next_page_three() {
     }
   });
 
-  // Špeciálna validácia pre email
   const emailInput = currentStep.querySelector("#email");
   if (emailInput) {
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -66,10 +64,8 @@ function show_next_page_three() {
       allFilled = false;
     }
   }
-  // Posunutie na ďalší krok
   if (allFilled) {
     if (currentStep.id === "form-step-1") {
-      console.log(currentStep);
       currentStep.classList.remove("visible");
       currentStep.classList.remove("hide");
       document.querySelector(".hide").classList.remove("hide"); // Nastavenie display = "block";
@@ -77,11 +73,70 @@ function show_next_page_three() {
       currentStep.style.display = "none";
       document.getElementById("form-step-2").classList.add("visible");
     } else if (allFilled && currentStep.id === "form-step-2") {
-      console.log(currentStep);
       document.getElementById("form-step-2").style.display = "none";
       document.getElementById("form-step-3").classList.add("visible");
       document.querySelector(".submit").style.display = "block";
       document.querySelector(".next-step").style.display = "none";
+      document.getElementById("hide-next-button").style.display = "none";
+    }
+  }
+}
+
+// Show next page when all required inputs are filled four step from
+
+function show_next_page_four() {
+  const currentStep = document.querySelector(".form.visible");
+  const requiredInputs = currentStep.querySelectorAll("input[required]");
+  let allFilled = true;
+
+  requiredInputs.forEach((input) => {
+    const errorIs = input.nextElementSibling;
+    if (errorIs && errorIs.classList.contains("error-message")) {
+      errorIs.remove();
+    }
+
+    if (input.value.trim() === "") {
+      allFilled = false;
+      const validationMessage = document.createElement("div");
+      validationMessage.classList = "error-message";
+      validationMessage.textContent = "This field is required";
+      input.insertAdjacentElement("afterend", validationMessage);
+    }
+  });
+
+  const emailInput = currentStep.querySelector("#email");
+  if (emailInput) {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailPattern.test(emailInput.value.trim())) {
+      allFilled = false;
+    }
+  }
+  if (allFilled) {
+    if (currentStep.id === "form-step-1") {
+      currentStep.classList.remove("visible");
+      currentStep.classList.remove("hide");
+      document.querySelector(".hide").classList.remove("hide"); // Nastavenie display = "block";
+      document.getElementById("hide-button").style.display = "none";
+      currentStep.style.display = "none";
+      document.getElementById("form-step-2").classList.add("visible");
+    } else if (allFilled && currentStep.id === "form-step-2") {
+      document.getElementById("form-step-2").style.display = "none";
+      document.getElementById("form-step-2").classList.remove("visible");
+      document.getElementById("form-step-3").classList.add("visible");
+      document.getElementById("button-step-2").style.display = "none";
+      document.querySelector(".submit").style.display = "block";
+      document.querySelector(".next-step").style.display = "none";
+      document.querySelector(".hide").classList.remove("hide");
+      document.getElementById("hide-next-button").style.display = "none";
+    } else if (allFilled && currentStep.id === "form-step-3") {
+      document.getElementById("form-step-3").style.display = "none";
+      document.getElementById("form-step-3").classList.remove("visible");
+      document.getElementById("form-step-4").classList.add("visible");
+      document.getElementById("hide-step-3").style.display = "none";
+      currentStep.classList.remove("hide");
+      document.querySelector(".submit").style.display = "block";
+      document.querySelector(".next-step").style.display = "none";
+      document.querySelector(".hide").classList.remove("hide");
       document.getElementById("hide-next-button").style.display = "none";
     }
   }

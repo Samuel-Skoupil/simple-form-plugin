@@ -27,6 +27,7 @@ h1 {
 
 #form-step-2,
 #form-step-3,
+#form-step-4,
 .hide {
   visibility: hidden;
   opacity: 0;
@@ -39,6 +40,7 @@ h1 {
 
 #form-step-2.visible,
 #form-step-3.visible,
+#form-step-4.visible,
 .hide.visible {
   visibility: visible;
   opacity: 1;
