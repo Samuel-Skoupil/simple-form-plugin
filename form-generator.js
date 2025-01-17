@@ -352,6 +352,25 @@ function validateAndSubmit() {
 }
 
 function showNextStep(currentStep) {
+  const currentFormStep = document.getElementById(`form-step-${currentStep}`);
+  const requiredFields = currentFormStep.querySelectorAll("[required]");
+  let valid = true;
+
+  requiredFields.forEach((field) => {
+    if (!field.value.trim()) {
+      field.classList.add("error");
+      valid = false;
+    } else {
+      field.classList.remove("error");
+    }
+  });
+
+  if (!valid) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  // Ak sú všetky polia vyplnené, prejdeme na ďalší krok
   const allSteps = document.querySelectorAll(".form");
   allSteps.forEach((step) => {
     step.classList.remove("visible");
