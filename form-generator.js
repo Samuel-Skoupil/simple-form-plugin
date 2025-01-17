@@ -283,6 +283,12 @@ function validateAndSubmit() {
   const activeForm = document.querySelector(".form-wrapper form");
   if (!activeForm) return;
 
+  // Odstránenie predchádzajúcich chybových správ
+  const existingErrorMessages = activeForm.querySelectorAll(
+    ".error-message-global"
+  );
+  existingErrorMessages.forEach((msg) => msg.remove());
+
   // Validácia povinných polí
   const requiredFields = activeForm.querySelectorAll("[required]");
   let valid = true;
@@ -291,14 +297,23 @@ function validateAndSubmit() {
     if (!field.value.trim()) {
       field.classList.add("error");
       valid = false;
+
+      // Pridanie chybovej správy pre konkrétne pole
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "error-message-global";
+      errorMessage.textContent = `"${field.previousSibling.textContent}" is required.`;
+      field.parentNode.appendChild(errorMessage);
     } else {
       field.classList.remove("error");
+      const fieldError = field.parentNode.querySelector(
+        ".error-message-global"
+      );
+      if (fieldError) fieldError.remove();
     }
   });
 
   if (!valid) {
-    alert("Please fill in all required fields.");
-    return;
+    return; // Zastaví odosielanie, ak sú polia prázdne
   }
 
   // Vytvorenie dát formulára
