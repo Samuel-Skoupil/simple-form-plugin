@@ -211,10 +211,15 @@ function createFormElement(
 
   let input;
   if (type === "select") {
+    // Vytvárame wrapper pre select s ikonou
     const selectWrapper = document.createElement("div");
-    selectWrapper.className = "icon-select"; // Wrapper pre šípku
+    selectWrapper.className = "icon-select"; // Wrapper pre šípku/ikonku
 
     input = document.createElement("select");
+    input.className = "styled-select"; // Trieda pre custom štýly
+    input.id = id;
+    input.name = id;
+
     options.forEach(({ value, text, hidden }) => {
       const option = document.createElement("option");
       option.value = value;
@@ -223,9 +228,9 @@ function createFormElement(
       input.appendChild(option);
     });
 
-    selectWrapper.appendChild(input);
+    selectWrapper.appendChild(input); // Pridáme select do wrappera
     formElement.appendChild(label);
-    formElement.appendChild(selectWrapper);
+    formElement.appendChild(selectWrapper); // Pridáme wrapper do formElement
     return formElement; // Končíme tu pre select
   } else {
     input = document.createElement("input");

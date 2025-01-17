@@ -175,6 +175,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #gender {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -5 24 24" fill="none"  stroke="%234CBB17" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 100 8 4 4 0 000-8zM16.24 7.76l4.52 4.52m0-4.52l-4.52 4.52"/></svg>');
   background-size: 35px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
 }
 
 /* request.js succes message  */
@@ -207,7 +209,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* custom select  */
 
 select {
-  width: 98%;
+  width: 50%;
   height: 45px;
   padding: 10px 15px;
   font-size: 16px;
@@ -222,7 +224,6 @@ select {
 }
 
 select::after {
-  content: "▼";
   position: absolute;
   right: 15px;
   top: 50%;
@@ -246,7 +247,7 @@ select:focus {
   font-size: 16px;
   border-radius: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 96%;
   outline: none;
   cursor: pointer;
 }
@@ -328,8 +329,4 @@ select:focus {
 
 .form-element {
   flex: 1;
-}
-
-.icon {
-  width: 80%;
 }
