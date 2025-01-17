@@ -211,6 +211,9 @@ function createFormElement(
 
   let input;
   if (type === "select") {
+    const selectWrapper = document.createElement("div");
+    selectWrapper.className = "icon-select"; // Wrapper pre šípku
+
     input = document.createElement("select");
     options.forEach(({ value, text, hidden }) => {
       const option = document.createElement("option");
@@ -219,6 +222,11 @@ function createFormElement(
       if (hidden) option.hidden = true;
       input.appendChild(option);
     });
+
+    selectWrapper.appendChild(input);
+    formElement.appendChild(label);
+    formElement.appendChild(selectWrapper);
+    return formElement; // Končíme tu pre select
   } else {
     input = document.createElement("input");
     input.type = type;
