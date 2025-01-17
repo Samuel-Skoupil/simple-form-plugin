@@ -209,7 +209,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* custom select  */
 
 select {
-  width: 50%;
+  width: 95%;
   height: 45px;
   padding: 10px 15px;
   font-size: 16px;
@@ -236,6 +236,18 @@ select::after {
 select:focus {
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+select.icon {
+  background-repeat: no-repeat;
+  background-position: calc(100% - 10px) center;
+  background-size: 27px;
+  filter: grayscale(100%);
+  transition: filter 0.65s ease;
+}
+
+select.icon-filled {
+  filter: none;
 }
 
 .styled-select {

@@ -211,12 +211,12 @@ function createFormElement(
 
   let input;
   if (type === "select") {
-    // Vytvárame wrapper pre select s ikonou
+    // Wrapper pre select
     const selectWrapper = document.createElement("div");
-    selectWrapper.className = "icon-select"; // Wrapper pre šípku/ikonku
+    selectWrapper.className = "icon-select";
 
     input = document.createElement("select");
-    input.className = "styled-select"; // Trieda pre custom štýly
+    input.className = "icon"; // Pridanie triedy icon
     input.id = id;
     input.name = id;
 
@@ -228,20 +228,37 @@ function createFormElement(
       input.appendChild(option);
     });
 
-    selectWrapper.appendChild(input); // Pridáme select do wrappera
+    // Dynamické prepínanie triedy icon-filled na základe výberu
+    input.addEventListener("change", () => {
+      if (input.value.trim()) {
+        input.classList.add("icon-filled");
+      } else {
+        input.classList.remove("icon-filled");
+      }
+    });
+
+    selectWrapper.appendChild(input);
     formElement.appendChild(label);
-    formElement.appendChild(selectWrapper); // Pridáme wrapper do formElement
-    return formElement; // Končíme tu pre select
+    formElement.appendChild(selectWrapper);
+    return formElement;
   } else {
     input = document.createElement("input");
     input.type = type;
     input.placeholder = placeholder;
   }
 
-  input.className = "icon"; // Trieda pre ikonky
+  input.className = "icon";
   input.id = id;
   input.name = id;
   if (required) input.required = true;
+
+  input.addEventListener("input", () => {
+    if (input.value.trim()) {
+      input.classList.add("icon-filled");
+    } else {
+      input.classList.remove("icon-filled");
+    }
+  });
 
   formElement.appendChild(label);
   formElement.appendChild(input);
