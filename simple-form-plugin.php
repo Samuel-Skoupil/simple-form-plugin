@@ -8,36 +8,14 @@ require_once plugin_dir_path(__FILE__) . "ajax-handler.php";
 
 function simple_line()
 {
+    // Načítanie aktuálneho nastavenia typu formulára
     $form_type = get_option('simple_form_type', 'one');
 
-    // Načíta one-step form
-    if ($form_type === 'one') {
-        ob_start();
-        include plugin_dir_path(__FILE__) . 'templates/form-one.php';
-        return ob_get_clean();
-    }
-
-    // Načíta two-step form
-    if ($form_type === 'two') {
-        ob_start();
-        include plugin_dir_path(__FILE__) . 'templates/form-two.php';
-        return ob_get_clean();
-    }
-
-    // Načíta three-step form
-    if ($form_type === 'three') {
-        ob_start();
-        include plugin_dir_path(__FILE__) . 'templates/form-three.php';
-        return ob_get_clean();
-    }
-
-    if ($form_type === 'four') {
-        ob_start();
-        include plugin_dir_path(__FILE__) . 'templates/form-four.php';
-        return ob_get_clean();
-    }
+    // Pripravenie kontajnera pre JavaScript
+    ob_start();
+    echo '<div id="simple-form-container" data-form-type="' . esc_attr($form_type) . '"></div>';
+    return ob_get_clean();
 }
-
 add_shortcode("simple_form", "simple_line");
 
 function simple_form_register_settings()
@@ -50,9 +28,18 @@ add_action('admin_init', 'simple_form_register_settings');
 function add_assets()
 {
     wp_enqueue_style("my-styles", plugin_dir_url(__FILE__) . "styles.css");
-    wp_enqueue_script("my-script", plugin_dir_url(__FILE__) . "script.js", array(), false, true);
-    wp_enqueue_script("request-script", plugin_dir_url(__FILE__) . "request.js", array('jquery'), false, true);
-    wp_localize_script("request-script", "simple_form_ajax", array(
+
+    // Načítanie JavaScriptového súboru pre generovanie formulára
+    wp_enqueue_script(
+        "form-generator-script",
+        plugin_dir_url(__FILE__) . "form-generator.js",
+        array('jquery'),
+        false,
+        true
+    );
+
+    // Poskytnutie dát z PHP do JavaScriptu (napr. Ajax URL, nonce)
+    wp_localize_script("form-generator-script", "simple_form_ajax", array(
         "ajax_url" => admin_url("admin-ajax.php"),
         "nonce" => wp_create_nonce("simple_form_nonce")
     ));
@@ -104,17 +91,3 @@ function simple_form_settings_menu()
     );
 }
 add_action('admin_menu', 'simple_form_settings_menu');
-
-function disable_form_submit_on_enter()
-{
-    echo "<script>
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>";
-}
-add_action('wp_footer', 'disable_form_submit_on_enter');

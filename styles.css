@@ -319,3 +319,17 @@ select:focus {
   margin-top: 4px;
   font-weight: 300;
 }
+
+.row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-element {
+  flex: 1; 
+}
+
+.icon {
+  width: 80%;
+}
