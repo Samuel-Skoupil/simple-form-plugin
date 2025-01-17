@@ -29,7 +29,6 @@ function add_assets()
 {
     wp_enqueue_style("my-styles", plugin_dir_url(__FILE__) . "styles.css");
 
-    // Načítanie JavaScriptového súboru pre generovanie formulára
     wp_enqueue_script(
         "form-generator-script",
         plugin_dir_url(__FILE__) . "form-generator.js",
@@ -38,7 +37,6 @@ function add_assets()
         true
     );
 
-    // Načítanie JavaScriptového súboru na spracovanie odoslania
     wp_enqueue_script(
         "request-script",
         plugin_dir_url(__FILE__) . "request.js",
@@ -47,7 +45,6 @@ function add_assets()
         true
     );
 
-    // Poskytnutie dát z PHP do JavaScriptu (napr. Ajax URL, nonce)
     wp_localize_script("request-script", "simple_form_ajax", array(
         "ajax_url" => admin_url("admin-ajax.php"),
         "nonce" => wp_create_nonce("simple_form_nonce")

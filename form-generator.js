@@ -10,7 +10,6 @@ function createForm(formType) {
   const container = document.getElementById("simple-form-container");
   container.innerHTML = "";
 
-  // Wrapper pre celý formulár
   const formWrapper = document.createElement("div");
   formWrapper.className = "form-wrapper";
 
@@ -92,12 +91,11 @@ function createForm(formType) {
 
   const totalSteps = steps[formType] || 1;
 
-  // Dynamické rozdelenie polí pre každý typ formulára
   const fieldDistribution = {
-    one: [8], // 1-stranový: všetky na jednej strane
-    two: [4, 4], // 2-stranový: 4 a 4
-    three: [4, 2, 2], // 3-stranový: 4, 2, 2
-    four: [2, 2, 2, 2], // 4-stranový: po 2 na každej strane
+    one: [8],
+    two: [4, 4],
+    three: [4, 2, 2],
+    four: [2, 2, 2, 2],
   };
 
   const fieldsPerStep = fieldDistribution[formType] || [fields.length];
@@ -110,18 +108,15 @@ function createForm(formType) {
     stepWrapper.className = `form ${step === 1 ? "visible" : ""}`;
     stepWrapper.style.display = step === 1 ? "block" : "none";
 
-    // Step Indicator (pridá sa len pri viackrokovom formulári)
     if (totalSteps > 1) {
       stepWrapper.appendChild(createStepIndicator(step, totalSteps));
     }
 
-    // Polia pre aktuálny krok
     const fieldsForThisStep = fieldsPerStep[step - 1];
     for (let i = 0; i < fieldsForThisStep; i += 2) {
       const row = document.createElement("div");
       row.className = "row";
 
-      // Prvé pole v riadku
       if (fieldIndex < fields.length) {
         row.appendChild(
           createFormElement(
@@ -136,7 +131,6 @@ function createForm(formType) {
         fieldIndex++;
       }
 
-      // Druhé pole v riadku (ak existuje)
       if (fieldIndex < fields.length) {
         row.appendChild(
           createFormElement(
@@ -154,7 +148,6 @@ function createForm(formType) {
       stepWrapper.appendChild(row);
     }
 
-    // Button pre každý krok
     const buttonText = step < totalSteps ? "Next step" : "Submit";
     const buttonFunction =
       step < totalSteps ? () => showNextStep(step) : validateAndSubmit;
@@ -211,12 +204,11 @@ function createFormElement(
 
   let input;
   if (type === "select") {
-    // Wrapper pre select
     const selectWrapper = document.createElement("div");
     selectWrapper.className = "icon-select";
 
     input = document.createElement("select");
-    input.className = "icon"; // Pridanie triedy icon
+    input.className = "icon";
     input.id = id;
     input.name = id;
 
@@ -228,7 +220,6 @@ function createFormElement(
       input.appendChild(option);
     });
 
-    // Dynamické prepínanie triedy icon-filled na základe výberu
     input.addEventListener("change", () => {
       if (input.value.trim()) {
         input.classList.add("icon-filled");
@@ -283,13 +274,11 @@ function validateAndSubmit() {
   const activeForm = document.querySelector(".form-wrapper form");
   if (!activeForm) return;
 
-  // Odstránenie predchádzajúcich chybových správ
   const existingErrorMessages = activeForm.querySelectorAll(
     ".error-message-global"
   );
   existingErrorMessages.forEach((msg) => msg.remove());
 
-  // Validácia povinných polí
   const requiredFields = activeForm.querySelectorAll("[required]");
   let valid = true;
 
@@ -298,7 +287,6 @@ function validateAndSubmit() {
       field.classList.add("error");
       valid = false;
 
-      // Pridanie chybovej správy pre konkrétne pole
       const errorMessage = document.createElement("div");
       errorMessage.className = "error-message-global";
       errorMessage.textContent = `"${field.previousSibling.textContent}" is required.`;
@@ -313,15 +301,13 @@ function validateAndSubmit() {
   });
 
   if (!valid) {
-    return; // Zastaví odosielanie, ak sú polia prázdne
+    return;
   }
 
-  // Vytvorenie dát formulára
   const formData = new FormData(activeForm);
   formData.append("action", "handle_simple_form_submission");
   formData.append("security", simple_form_ajax.nonce);
 
-  // Odoslanie dát cez fetch
   fetch(simple_form_ajax.ajax_url, {
     method: "POST",
     body: formData,
@@ -329,24 +315,19 @@ function validateAndSubmit() {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        // Skryjeme formulár
         activeForm.style.display = "none";
 
-        // Vytvorenie success containeru
         const successContainer = document.createElement("div");
         successContainer.className = "success-message";
         successContainer.innerHTML =
           "<p>Form has been submitted successfully!</p>";
 
-        // Pridanie success containeru do DOM
         activeForm.parentNode.appendChild(successContainer);
 
-        // Animácia success správy
         setTimeout(() => {
           successContainer.classList.add("visible");
         }, 100);
       } else {
-        // Zobrazenie chybovej správy
         const errorContainer = document.createElement("div");
         errorContainer.className = "error-message";
         errorContainer.innerHTML =
@@ -357,7 +338,6 @@ function validateAndSubmit() {
     .catch((error) => {
       console.error("Error:", error);
 
-      // Zobrazenie chybovej správy pri probléme s odoslaním
       const errorContainer = document.createElement("div");
       errorContainer.className = "error-message";
       errorContainer.innerHTML =
@@ -371,21 +351,33 @@ function showNextStep(currentStep) {
   const requiredFields = currentFormStep.querySelectorAll("[required]");
   let valid = true;
 
+  const existingErrorMessages = currentFormStep.querySelectorAll(
+    ".error-message-global"
+  );
+  existingErrorMessages.forEach((msg) => msg.remove());
+
   requiredFields.forEach((field) => {
     if (!field.value.trim()) {
       field.classList.add("error");
       valid = false;
+
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "error-message-global";
+      errorMessage.textContent = `"${field.previousSibling.textContent}" is required.`;
+      field.parentNode.appendChild(errorMessage);
     } else {
       field.classList.remove("error");
+      const fieldError = field.parentNode.querySelector(
+        ".error-message-global"
+      );
+      if (fieldError) fieldError.remove();
     }
   });
 
   if (!valid) {
-    alert("Please fill in all required fields.");
     return;
   }
 
-  // Ak sú všetky polia vyplnené, prejdeme na ďalší krok
   const allSteps = document.querySelectorAll(".form");
   allSteps.forEach((step) => {
     step.classList.remove("visible");
