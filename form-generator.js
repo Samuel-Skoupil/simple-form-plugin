@@ -258,7 +258,75 @@ function createButtonContainer(buttonText, onClickFunction) {
 }
 
 function validateAndSubmit() {
-  alert("Form submitted successfully!");
+  const activeForm = document.querySelector(".form-wrapper form");
+  if (!activeForm) return;
+
+  // Validácia povinných polí
+  const requiredFields = activeForm.querySelectorAll("[required]");
+  let valid = true;
+
+  requiredFields.forEach((field) => {
+    if (!field.value.trim()) {
+      field.classList.add("error");
+      valid = false;
+    } else {
+      field.classList.remove("error");
+    }
+  });
+
+  if (!valid) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  // Vytvorenie dát formulára
+  const formData = new FormData(activeForm);
+  formData.append("action", "handle_simple_form_submission");
+  formData.append("security", simple_form_ajax.nonce);
+
+  // Odoslanie dát cez fetch
+  fetch(simple_form_ajax.ajax_url, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // Skryjeme formulár
+        activeForm.style.display = "none";
+
+        // Vytvorenie success containeru
+        const successContainer = document.createElement("div");
+        successContainer.className = "success-message";
+        successContainer.innerHTML =
+          "<p>Form has been submitted successfully!</p>";
+
+        // Pridanie success containeru do DOM
+        activeForm.parentNode.appendChild(successContainer);
+
+        // Animácia success správy
+        setTimeout(() => {
+          successContainer.classList.add("visible");
+        }, 100);
+      } else {
+        // Zobrazenie chybovej správy
+        const errorContainer = document.createElement("div");
+        errorContainer.className = "error-message";
+        errorContainer.innerHTML =
+          "<p>Failed to submit the form. Please try again.</p>";
+        activeForm.appendChild(errorContainer);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+
+      // Zobrazenie chybovej správy pri probléme s odoslaním
+      const errorContainer = document.createElement("div");
+      errorContainer.className = "error-message";
+      errorContainer.innerHTML =
+        "<p>An error occurred. Please try again later.</p>";
+      activeForm.appendChild(errorContainer);
+    });
 }
 
 function showNextStep(currentStep) {

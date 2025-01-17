@@ -38,13 +38,23 @@ function add_assets()
         true
     );
 
+    // Načítanie JavaScriptového súboru na spracovanie odoslania
+    wp_enqueue_script(
+        "request-script",
+        plugin_dir_url(__FILE__) . "request.js",
+        array('jquery'),
+        false,
+        true
+    );
+
     // Poskytnutie dát z PHP do JavaScriptu (napr. Ajax URL, nonce)
-    wp_localize_script("form-generator-script", "simple_form_ajax", array(
+    wp_localize_script("request-script", "simple_form_ajax", array(
         "ajax_url" => admin_url("admin-ajax.php"),
         "nonce" => wp_create_nonce("simple_form_nonce")
     ));
 }
 add_action("wp_enqueue_scripts", "add_assets");
+
 
 function simple_form_settings_page()
 {
